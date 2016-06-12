@@ -1,0 +1,201 @@
+# Example PHP Schema file
+# Use the following command to regenerate entities:
+# bin/schema generate-types src/ app/config/schema.yml
+
+annotationGenerators:
+    - ApiPlatform\SchemaGenerator\AnnotationGenerator\PhpDocAnnotationGenerator
+    - ApiPlatform\SchemaGenerator\AnnotationGenerator\DoctrineOrmAnnotationGenerator
+    - ApiPlatform\SchemaGenerator\AnnotationGenerator\ConstraintAnnotationGenerator
+    - ApiPlatform\SchemaGenerator\AnnotationGenerator\DunglasApiAnnotationGenerator
+namespaces:
+  entity: MassAPIBundle\Entity
+types:
+  Duration:
+    parent: false
+    properties:
+      name: ~
+      alternateName: ~
+      description: ~
+  AggregateRating:
+    parent: false
+    properties:
+      itemReviewed:
+        range:       Event
+        cardinality: (*..*)
+      ratingCount: ~
+      reviewCount: ~
+  Language:
+    parent: false
+    properties:
+      name: ~
+      alternateName: ~
+      description: ~
+  EventStatusType:
+    parent: false
+    properties:
+      name: ~
+      alternateName: ~
+      description: ~
+  Event:
+    parent: false
+    properties:
+      actor:
+        range:       Person
+        cardinality: (*..*)
+        relationTableName: event_actor
+      aggregateRating: ~
+      attendee:
+        range:       Person
+        cardinality: (*..*)
+        relationTableName: event_attendee
+      director:
+        range:       Person
+        cardinality: (*..*)
+        relationTableName: event_director
+      doorTime: ~
+      duration: ~
+      endDate: ~
+      eventStatus: ~
+      inLanguage:
+        range:       Language
+        cardinality: (*..*)
+      location:
+        range:       Place
+        cardinality: (*..*)
+      organizer:
+        range:       Person
+        cardinality: (*..*)
+        relationTableName: event_organizer
+      performer:
+        range:       Person
+        cardinality: (*..*)
+        relationTableName: event_performer
+      previousStartDate: ~
+      recordedIn: ~
+      review:
+        range: Review
+        cardinality: (*..*)
+      startDate: ~
+      subEvent: ~
+      superEvent: ~
+      typicalAgeRange: ~
+      description: ~
+      image:
+        range: ImageObject
+      name: ~
+      url: ~
+  GeoCoordinates:
+    parent: false
+    properties:
+      latitude: ~
+      longitude: ~
+  GeoShape:
+    parent: false
+    properties:
+      polygon: ~
+  Country:
+    parent: false
+    properties:
+      name: ~
+      geo:
+        range: GeoShape
+      globalLocationNumber: ~
+  PostalAddress:
+    parent: false
+    properties:
+      addressCountry:
+        range: Country
+      addressLocality: ~
+      addressRegion: ~
+      postOfficeBoxNumber: ~
+      postalCode: ~
+      streetAddress: ~
+  DayOfWeek:
+    parent: false
+    properties:
+      name: ~
+  OpeningHoursSpecification:
+    parent: false
+    properties:
+      closes: ~
+      dayOfWeek: ~
+      opens: ~
+      validFrom: ~
+      validThrough: ~
+  ImageObject:
+    parent: false
+    properties:
+      caption: ~
+      exifData: ~
+      thumbnail: ~
+  Place:
+    parent: false
+    properties:
+      address:
+        range: PostalAddress
+      aggregateRating: ~
+      containedInPlace:
+        range:       Place
+        cardinality: (*..*)
+        relationTableName: place_contained_in
+      containsPlace:
+        range:       Place
+        cardinality: (*..*)
+        relationTableName: place_contains
+      event:
+        range: Event
+        cardinality: (*..*)
+      faxNumber: ~
+      geo:
+        range: GeoCoordinates
+      globalLocationNumber: ~
+      hasMap: ~
+      logo:
+        range: ImageObject
+      openingHoursSpecification: ~
+      photo:
+        range: ImageObject
+      review:
+        range: Review
+        cardinality: (*..*)
+      specialOpeningHoursSpecification: ~
+      telephone: ~
+  Review:
+    parent: false
+    properties:
+      name: ~
+      description: ~
+      author:
+        range:       Person
+        cardinality: (*..*)
+      datePublished: ~
+      url: ~
+      recordedAt: ~
+  CreativeWork:
+    parent: false
+    properties:
+      name: ~
+      description: ~
+      author:
+        range:       Person
+        cardinality: (*..*)
+      publisher: ~
+      genre: ~
+      datePublished: ~
+      url: ~
+      recordedAt: ~
+  Person:
+    parent: false
+    properties:
+      name: ~
+      description: ~
+      url: ~
+      birthDate: ~
+      gender: ~
+  Organization:
+    parent: false
+    properties:
+      name: ~
+      description: ~
+      url: ~
+

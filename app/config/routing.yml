@@ -1,0 +1,11 @@
+mass_api:
+    resource: "@MassAPIBundle/Resources/config/routing.yml"
+    prefix:   /
+
+api:
+    resource: "."
+    type:     "api"
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   "/doc"

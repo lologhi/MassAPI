@@ -1,0 +1,4 @@
+services:
+#    mass_api.example:
+#        class: MassAPIBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

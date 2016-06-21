@@ -5,6 +5,7 @@ namespace MassAPIBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -15,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @Iri("http://schema.org/Place")
  */
-class Place
+class Place implements ResourceInterface
 {
     /**
      * @var int
@@ -92,6 +93,14 @@ class Place
      * @Iri("https://schema.org/logo")
      */
     private $logo;
+    /**
+     * @var string The name of the item.
+     *
+     * @ORM\Column(nullable=true)
+     * @Assert\Type(type="string")
+     * @Iri("https://schema.org/name")
+     */
+    private $name;
     /**
      * @var string A URL to a map of the place.
      * 
@@ -427,6 +436,30 @@ class Place
     public function getLogo()
     {
         return $this->logo;
+    }
+
+    /**
+     * Sets name.
+     *
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**

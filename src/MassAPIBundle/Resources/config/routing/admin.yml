@@ -10,3 +10,10 @@ admin_country:
     resource: "@MassAPIBundle/Resources/config/routing/admin/country.yml"
     prefix: /country
 
+admin_event:
+    resource: "@MassAPIBundle/Resources/config/routing/admin/event.yml"
+    prefix: /event
+
+admin_place:
+    resource: "@MassAPIBundle/Resources/config/routing/admin/place.yml"
+    prefix: /place

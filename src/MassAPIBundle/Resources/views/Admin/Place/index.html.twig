@@ -1,0 +1,27 @@
+{% extends 'MassAPIBundle:Admin:layout.html.twig' %}
+
+{% block container %}
+    <div class="btn-group" role="group">
+        <a href="{{ path('admin_place_create') }}" type="button" class="btn btn-primary">New</a>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for place in places %}
+            <tr>
+                <td>{{ place.id }}</td>
+                <td>{{ place.name }}</td>
+                <td><a href="{{ path('admin_place_update', {'id': place.id}) }}" type="button" class="btn btn-primary">Edit</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ pagerfanta(places) }}
+{% endblock %}

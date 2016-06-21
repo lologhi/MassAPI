@@ -1,0 +1,30 @@
+admin_place_index:
+    path: /
+    defaults:
+        _controller: massapi.controller.place:indexAction
+        _sylius:
+            template: 'MassAPIBundle:Admin/Place:index.html.twig'
+            paginate: 40
+
+admin_place_create:
+    path: /create
+    defaults:
+        _controller: massapi.controller.place:createAction
+        _sylius:
+            template: 'MassAPIBundle:Admin/Place:form.html.twig'
+            redirect: admin_place_index
+
+admin_place_update:
+    path: /update/{id}
+    defaults:
+        _controller: massapi.controller.place:updateAction
+        _sylius:
+            template: 'MassAPIBundle:Admin/Place:form.html.twig'
+            redirect: admin_place_index
+
+admin_place_delete:
+    path: /delete/{id}
+    defaults:
+        _controller: massapi.controller.place:deleteAction
+        _sylius:
+            redirect: admin_place_index

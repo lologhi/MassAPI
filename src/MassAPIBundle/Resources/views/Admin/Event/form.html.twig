@@ -1,0 +1,49 @@
+{% extends 'MassAPIBundle:Admin:layout.html.twig' %}
+
+{% block container %}
+    <a href="{{ path('admin_event_index') }}" class="btn btn-default">Back to list</a>
+
+    {{ form_errors(form) }}
+
+    <form class="form-horizontal" role="form" method="POST">
+        {{ form_row(form.location) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.eventStatus) }}
+        {{ form_row(form.inLanguage) }}
+        {{ form_row(form.typicalAgeRange) }}
+        {{ form_row(form.url) }}
+
+        {{ form_row(form.startDate) }}
+        {{ form_row(form.endDate) }}
+        {{ form_row(form.duration) }}
+        {{ form_row(form.doorTime) }}
+        {{ form_row(form.previousStartDate) }}
+
+        {{ form_row(form.recordedIn) }}
+
+        {{ form_row(form.image) }}
+
+        {{ form_row(form.aggregateRating) }}
+        {{ form_row(form.review) }}
+
+        {{ form_row(form.actor) }}
+        {{ form_row(form.organizer) }}
+        {{ form_row(form.attendee) }}
+        {{ form_row(form.director) }}
+        {{ form_row(form.performer) }}
+
+        {{ form_row(form.subEvent) }}
+        {{ form_row(form.superEvent) }}
+
+
+        {{ form_rest(form) }}
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

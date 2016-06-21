@@ -1,0 +1,32 @@
+admin_event_index:
+    path: /
+    defaults:
+        _controller: massapi.controller.event:indexAction
+        _sylius:
+            template: 'MassAPIBundle:Admin/Event:index.html.twig'
+            paginate: 40
+
+admin_event_create:
+    path: /create
+    defaults:
+        _controller: massapi.controller.event:createAction
+        _sylius:
+            template: 'MassAPIBundle:Admin/Event:form.html.twig'
+            form:     mass_api_place
+            redirect: admin_event_index
+
+admin_event_update:
+    path: /update/{id}
+    defaults:
+        _controller: massapi.controller.event:updateAction
+        _sylius:
+            template: 'MassAPIBundle:Admin/Event:form.html.twig'
+            form:     mass_api_place
+            redirect: admin_event_index
+
+admin_event_delete:
+    path: /delete/{id}
+    defaults:
+        _controller: massapi.controller.event:deleteAction
+        _sylius:
+            redirect: admin_event_index

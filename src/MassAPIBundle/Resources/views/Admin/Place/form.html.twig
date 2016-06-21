@@ -1,0 +1,39 @@
+{% extends 'MassAPIBundle:Admin:layout.html.twig' %}
+
+{% block container %}
+    <a href="{{ path('admin_place_index') }}" class="btn btn-default">Back to list</a>
+
+    {{ form_errors(form) }}
+
+    <form class="form-horizontal" role="form" method="POST">
+        {{ form_row(form.name) }}
+        {{ form_row(form.address) }}
+        {{ form_row(form.faxNumber) }}
+
+        {{ form_row(form.containedInPlace) }}
+        {{ form_row(form.containsPlace) }}
+
+        {{ form_row(form.event) }}
+
+        {{ form_row(form.geo) }}
+        {{ form_row(form.globalLocationNumber) }}
+        {{ form_row(form.hasMap) }}
+
+        {{ form_row(form.logo) }}
+        {{ form_row(form.photo) }}
+
+        {{ form_row(form.openingHoursSpecification) }}
+        {{ form_row(form.specialOpeningHoursSpecification) }}
+
+        {{ form_row(form.aggregateRating) }}
+        {{ form_row(form.review) }}
+
+        {{ form_rest(form) }}
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

@@ -4,6 +4,7 @@ namespace MassAPIBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @Iri("http://schema.org/Country")
  */
-class Country
+class Country implements ResourceInterface
 {
     /**
      * @var int

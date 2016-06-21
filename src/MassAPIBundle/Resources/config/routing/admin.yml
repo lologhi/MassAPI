@@ -1,0 +1,12 @@
+admin_dashboard:
+    path: /
+    defaults:
+        _controller: vf.controller.location:indexAction
+        _sylius:
+            template: 'FrontBundle:Admin:dashboard.html.twig'
+            paginate: false
+
+admin_country:
+    resource: "@MassAPIBundle/Resources/config/routing/admin/country.yml"
+    prefix: /country
+

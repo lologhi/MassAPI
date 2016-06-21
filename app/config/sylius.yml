@@ -1,0 +1,63 @@
+sylius_resource:
+    resources:
+        massapi.agregate_rating:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\AggregateRating
+                #controller: CommonBundle\Controller\MediaGalleryController
+        massapi.country:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\Country
+        massapi.creative_work:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\CreativeWork
+        massapi.duration:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\Duration
+        massapi.event:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\Event
+        massapi.geo_coordinates:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\GeoCoordinates
+        massapi.geo_shape:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\GeoShape
+        massapi.image_object:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\ImageObject
+        massapi.language:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\Language
+        massapi.opening_hours_specification:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\OpeningHoursSpecification
+        massapi.organization:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\Organization
+        massapi.person:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\Person
+        massapi.place:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\Place
+        massapi.postal_address:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\PostalAddress
+        massapi.review:
+            driver: doctrine/orm
+            classes:
+                model: MassAPIBundle\Entity\Review

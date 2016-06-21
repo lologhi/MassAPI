@@ -19,6 +19,9 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new FOS\HttpCacheBundle\FOSHttpCacheBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 
             new MassAPIBundle\MassAPIBundle(),

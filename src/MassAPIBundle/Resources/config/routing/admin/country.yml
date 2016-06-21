@@ -1,0 +1,30 @@
+admin_country_index:
+    path: /
+    defaults:
+        _controller: massapi.controller.country:indexAction
+        _sylius:
+            template: 'MassAPIBundle:Admin/Country:index.html.twig'
+            paginate: 40
+
+admin_country_create:
+    path: /create
+    defaults:
+        _controller: massapi.controller.country:createAction
+        _sylius:
+            template: 'MassAPIBundle:Admin/Country:form.html.twig'
+            redirect: admin_country_index
+
+admin_country_update:
+    path: /update/{id}
+    defaults:
+        _controller: massapi.controller.country:updateAction
+        _sylius:
+            template: 'MassAPIBundle:Admin/Country:form.html.twig'
+            redirect: admin_country_index
+
+admin_country_delete:
+    path: /delete/{id}
+    defaults:
+        _controller: massapi.controller.country:deleteAction
+        _sylius:
+            redirect: admin_country_index

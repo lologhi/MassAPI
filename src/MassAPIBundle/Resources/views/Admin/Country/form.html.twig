@@ -1,0 +1,21 @@
+{% extends 'MassAPIBundle:Admin:layout.html.twig' %}
+
+{% block container %}
+    <a href="{{ path('admin_country_index') }}" class="btn btn-default">Back to list</a>
+
+    {{ form_errors(form) }}
+
+    <form class="form-horizontal" role="form" method="POST">
+        {{ form_row(form.name) }}
+        {{ form_row(form.geo) }}
+        {{ form_row(form.globalLocationNumber) }}
+
+        {{ form_rest(form) }}
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

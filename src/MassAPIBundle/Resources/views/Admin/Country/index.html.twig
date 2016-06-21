@@ -1,0 +1,27 @@
+{% extends 'MassAPIBundle:Admin:layout.html.twig' %}
+
+{% block container %}
+    <div class="btn-group" role="group">
+        <a href="{{ path('admin_country_create') }}" type="button" class="btn btn-primary">New</a>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for country in countries %}
+            <tr>
+                <td>{{ country.id }}</td>
+                <td>{{ country.name }}</td>
+                <td><a href="{{ path('admin_country_update', {'id': country.id}) }}" type="button" class="btn btn-primary">Edit</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ pagerfanta(countries) }}
+{% endblock %}

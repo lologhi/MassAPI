@@ -23,6 +23,7 @@
         "nelmio/cors-bundle": "~1.4",
         "nelmio/api-doc-bundle": "~2.9@dev",
         "sylius/resource-bundle": "0.17",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
         "friendsofsymfony/http-cache-bundle": "~1.0"
     },
     "require-dev": {

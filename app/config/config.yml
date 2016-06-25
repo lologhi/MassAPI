@@ -27,10 +27,20 @@ framework:
     fragments:       ~
     http_method_override: false
 
+assetic:
+    debug: '%kernel.debug%'
+    use_controller: false
+    filters:
+        cssrewrite:
+            apply_to:   "\.css$"
+
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - 'MassAPIBundle::forms.html.twig'
 
 # Doctrine Configuration
 doctrine:

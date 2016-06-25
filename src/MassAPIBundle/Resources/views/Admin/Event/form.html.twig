@@ -1,42 +1,60 @@
 {% extends 'MassAPIBundle:Admin:layout.html.twig' %}
 
+{% block title %}Event edition • MassAPI • Admin{% endblock %}
+
 {% block container %}
     <a href="{{ path('admin_event_index') }}" class="btn btn-default">Back to list</a>
 
     {{ form_errors(form) }}
 
     <form class="form-horizontal" role="form" method="POST">
-        {{ form_row(form.location) }}
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#basics" aria-controls="basics" role="tab" data-toggle="tab">Basics</a></li>
+            <li role="presentation"><a href="#logo" aria-controls="logo" role="tab" data-toggle="tab">Media</a></li>
+            <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
+            <li role="presentation"><a href="#people" aria-controls="people" role="tab" data-toggle="tab">People</a></li>
+            <li role="presentation"><a href="#imbrication" aria-controls="imbrication" role="tab" data-toggle="tab">Imbrication</a></li>
+        </ul>
 
-        {{ form_row(form.name) }}
-        {{ form_row(form.description) }}
-        {{ form_row(form.eventStatus) }}
-        {{ form_row(form.inLanguage) }}
-        {{ form_row(form.typicalAgeRange) }}
-        {{ form_row(form.url) }}
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="basics">
+                {{ form_row(form.location, {'attr': {'class': 'select2'}}) }}
+                {{ form_row(form.startDate, {'attr': {'class': 'datepicker'}}) }}
+                {{ form_row(form.duration, {'attr': {'class': 'select2'}}) }}
 
-        {{ form_row(form.startDate) }}
-        {{ form_row(form.endDate) }}
-        {{ form_row(form.duration) }}
-        {{ form_row(form.doorTime) }}
-        {{ form_row(form.previousStartDate) }}
+                {{ form_row(form.name) }}
+                {{ form_row(form.description) }}
+                {{ form_row(form.eventStatus) }}
+                {{ form_row(form.inLanguage, {'attr': {'class': 'select2'}}) }}
+                {{ form_row(form.typicalAgeRange) }}
+                {{ form_row(form.url) }}
 
-        {{ form_row(form.recordedIn) }}
-
-        {{ form_row(form.image) }}
-
-        {{ form_row(form.aggregateRating) }}
-        {{ form_row(form.review) }}
-
-        {{ form_row(form.actor) }}
-        {{ form_row(form.organizer) }}
-        {{ form_row(form.attendee) }}
-        {{ form_row(form.director) }}
-        {{ form_row(form.performer) }}
-
-        {{ form_row(form.subEvent) }}
-        {{ form_row(form.superEvent) }}
-
+                {{ form_row(form.endDate, {'attr': {'class': 'datepicker'}}) }}
+                {{ form_row(form.doorTime) }}
+                {{ form_row(form.previousStartDate, {'attr': {'class': 'datepicker'}}) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="logo">
+                {{ form_row(form.image) }}
+                {{ form_row(form.recordedIn) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="reviews">
+                {{ form_row(form.aggregateRating) }}
+                {{ form_row(form.review) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="people">
+                {{ form_row(form.actor, {'attr': {'class': 'select2'}}) }}
+                {{ form_row(form.organizer, {'attr': {'class': 'select2'}}) }}
+                {{ form_row(form.attendee, {'attr': {'class': 'select2'}}) }}
+                {{ form_row(form.director, {'attr': {'class': 'select2'}}) }}
+                {{ form_row(form.performer, {'attr': {'class': 'select2'}}) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="imbrication">
+                {{ form_row(form.subEvent, {'attr': {'class': 'select2'}}) }}
+                {{ form_row(form.superEvent, {'attr': {'class': 'select2'}}) }}
+            </div>
+        </div>
 
         {{ form_rest(form) }}
 

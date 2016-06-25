@@ -1,32 +1,54 @@
 {% extends 'MassAPIBundle:Admin:layout.html.twig' %}
 
+{% block title %}Place edition • MassAPI • Admin{% endblock %}
+
 {% block container %}
-    <a href="{{ path('admin_place_index') }}" class="btn btn-default">Back to list</a>
+    <a href="{{ path('admin_place_index') }}" class="btn btn-default">Back to Place list</a>
 
     {{ form_errors(form) }}
 
     <form class="form-horizontal" role="form" method="POST">
-        {{ form_row(form.name) }}
-        {{ form_row(form.address) }}
-        {{ form_row(form.faxNumber) }}
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#basics" aria-controls="basics" role="tab" data-toggle="tab">Basics</a></li>
+            <li role="presentation"><a href="#openingHours" aria-controls="openingHours" role="tab" data-toggle="tab">Opening hours</a></li>
+            <li role="presentation"><a href="#logo" aria-controls="logo" role="tab" data-toggle="tab">Logo</a></li>
+            <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
+            <li role="presentation"><a href="#imbrication" aria-controls="imbrication" role="tab" data-toggle="tab">Imbrication</a></li>
+            <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">Events</a></li>
+        </ul>
 
-        {{ form_row(form.containedInPlace) }}
-        {{ form_row(form.containsPlace) }}
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="basics">
+                {{ form_row(form.name) }}
+                {{ form_row(form.address) }}
+                {{ form_row(form.faxNumber) }}
 
-        {{ form_row(form.event) }}
-
-        {{ form_row(form.geo) }}
-        {{ form_row(form.globalLocationNumber) }}
-        {{ form_row(form.hasMap) }}
-
-        {{ form_row(form.logo) }}
-        {{ form_row(form.photo) }}
-
-        {{ form_row(form.openingHoursSpecification) }}
-        {{ form_row(form.specialOpeningHoursSpecification) }}
-
-        {{ form_row(form.aggregateRating) }}
-        {{ form_row(form.review) }}
+                {{ form_row(form.geo) }}
+                {{ form_row(form.globalLocationNumber) }}
+                {{ form_row(form.hasMap) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="openingHours">
+                {{ form_row(form.openingHoursSpecification) }}
+                {{ form_row(form.specialOpeningHoursSpecification) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="logo">
+                {{ form_row(form.logo) }}
+                {{ form_row(form.photo) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="reviews">
+                {{ form_row(form.aggregateRating) }}
+                {{ form_row(form.review) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="imbrication">
+                {#{{ form_row(form.containedInPlace) }}
+                {{ form_row(form.containsPlace) }}#}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="events">
+                {#{{ form_row(form.event) }}#}
+            </div>
+        </div>
 
         {{ form_rest(form) }}
 

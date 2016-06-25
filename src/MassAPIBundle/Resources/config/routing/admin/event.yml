@@ -12,7 +12,7 @@ admin_event_create:
         _controller: massapi.controller.event:createAction
         _sylius:
             template: 'MassAPIBundle:Admin/Event:form.html.twig'
-            form:     mass_api_place
+            form:     mass_api_event
             redirect: admin_event_index
 
 admin_event_update:
@@ -21,7 +21,7 @@ admin_event_update:
         _controller: massapi.controller.event:updateAction
         _sylius:
             template: 'MassAPIBundle:Admin/Event:form.html.twig'
-            form:     mass_api_place
+            form:     mass_api_event
             redirect: admin_event_index
 
 admin_event_delete:

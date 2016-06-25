@@ -1,0 +1,15 @@
+services:
+    mass_api.form.place:
+        class: MassAPIBundle\Form\PlaceType
+        tags:
+            - { name: form.type, alias: mass_api_place }
+
+    mass_api.form.event:
+        class: MassAPIBundle\Form\EventType
+        tags:
+            - { name: form.type, alias: mass_api_event }
+
+    mass_api.form.postal_address:
+        class: MassAPIBundle\Form\PostalAddressType
+        tags:
+            - { name: form.type, alias: mass_api_postal_address }

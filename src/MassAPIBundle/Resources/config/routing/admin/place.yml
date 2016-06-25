@@ -12,6 +12,7 @@ admin_place_create:
         _controller: massapi.controller.place:createAction
         _sylius:
             template: 'MassAPIBundle:Admin/Place:form.html.twig'
+            form:     mass_api_place
             redirect: admin_place_index
 
 admin_place_update:
@@ -20,6 +21,7 @@ admin_place_update:
         _controller: massapi.controller.place:updateAction
         _sylius:
             template: 'MassAPIBundle:Admin/Place:form.html.twig'
+            form:     mass_api_place
             redirect: admin_place_index
 
 admin_place_delete:

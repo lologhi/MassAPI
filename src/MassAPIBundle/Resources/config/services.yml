@@ -1,3 +1,6 @@
+imports:
+    - { resource: form.yml }
+
 services:
 #    mass_api.example:
 #        class: MassAPIBundle\Example

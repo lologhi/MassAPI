@@ -29,7 +29,7 @@ class Place implements ResourceInterface
     /**
      * @var PostalAddress Physical address of the item.
      * 
-     * @ORM\ManyToOne(targetEntity="MassAPIBundle\Entity\PostalAddress")
+     * @ORM\ManyToOne(targetEntity="MassAPIBundle\Entity\PostalAddress", cascade={"persist"})
      * @Iri("https://schema.org/address")
      */
     private $address;
@@ -154,6 +154,8 @@ class Place implements ResourceInterface
         $this->containsPlace = new ArrayCollection();
         $this->event = new ArrayCollection();
         $this->review = new ArrayCollection();
+        $this->openingHoursSpecification = new ArrayCollection();
+        $this->specialOpeningHoursSpecification = new ArrayCollection();
     }
 
     /**

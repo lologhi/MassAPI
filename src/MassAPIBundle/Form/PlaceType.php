@@ -2,6 +2,7 @@
 
 namespace MassAPIBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,8 +16,14 @@ class PlaceType extends AbstractType
             ->add('address', PostalAddressType::class)
             ->add('faxNumber')
 
-            ->add('containedInPlace')
-            ->add('containsPlace')
+            ->add('containedInPlace', EntityType::class, array(
+                'class'    => 'MassAPIBundle\Entity\Place',
+                'property' => 'name',
+            ))
+            ->add('containsPlace', EntityType::class, array(
+                'class'    => 'MassAPIBundle\Entity\Place',
+                'property' => 'name',
+            ))
 
             ->add('geo')
             ->add('globalLocationNumber')

@@ -11,3 +11,5 @@
 /bin/
 /composer.phar
 web/vendor
+web/css
+web/js

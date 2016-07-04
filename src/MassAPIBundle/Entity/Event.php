@@ -85,7 +85,7 @@ class Event implements ResourceInterface
     /**
      * @var Duration The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601).
      * 
-     * @ORM\OneToOne(targetEntity="MassAPIBundle\Entity\Duration")
+     * @ORM\OneToOne(targetEntity="MassAPIBundle\Entity\Duration", cascade={"persist"})
      * @Iri("https://schema.org/duration")
      */
     private $duration;
@@ -634,6 +634,17 @@ class Event implements ResourceInterface
     public function getLocation()
     {
         return $this->location;
+    }
+
+    public function hasLocation(Place $location)
+    {
+        foreach ($this->location as $linkedLocation) {
+            if ($linkedLocation === $location) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

@@ -74,7 +74,7 @@ class Place implements ResourceInterface
     /**
      * @var GeoCoordinates The geo coordinates of the place.
      * 
-     * @ORM\OneToOne(targetEntity="MassAPIBundle\Entity\GeoCoordinates")
+     * @ORM\OneToOne(targetEntity="MassAPIBundle\Entity\GeoCoordinates", cascade={"persist"})
      * @Iri("https://schema.org/geo")
      */
     private $geo;
@@ -155,7 +155,6 @@ class Place implements ResourceInterface
         $this->event = new ArrayCollection();
         $this->review = new ArrayCollection();
         $this->openingHoursSpecification = new ArrayCollection();
-        $this->specialOpeningHoursSpecification = new ArrayCollection();
     }
 
     /**

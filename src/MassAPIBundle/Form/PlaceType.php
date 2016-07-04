@@ -25,7 +25,6 @@ class PlaceType extends AbstractType
                 'property' => 'name',
             ))
 
-            ->add('geo')
             ->add('globalLocationNumber')
             ->add('hasMap')
 

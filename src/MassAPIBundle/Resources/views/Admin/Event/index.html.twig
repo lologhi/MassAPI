@@ -19,8 +19,8 @@
         {% for event in events %}
             <tr>
                 <td>{{ event.id }}</td>
-                <td>{{ event.location.name }}</td>
-                <td>{{ event.startDate|date('d/m/Y') }}</td>
+                <td>{% for location in event.location %}{{ location.name }}{% endfor %}</td>
+                <td>{{ event.doorTime|date('d/m/Y H:i') }}</td>
                 <td><a href="{{ path('admin_event_update', {'id': event.id}) }}" type="button" class="btn btn-primary">Edit</a></td>
             </tr>
         {% endfor %}

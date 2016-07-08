@@ -1,3 +1,8 @@
+home:
+    path: /
+    defaults:
+        _controller: MassAPIBundle:Default:index
+
 admin:
     resource: "@MassAPIBundle/Resources/config/routing/admin.yml"
     prefix: /admin

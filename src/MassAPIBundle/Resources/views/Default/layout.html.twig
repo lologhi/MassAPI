@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}MassAPI • Admin{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    {% block stylesheets %}
+        {% stylesheets output="css/mass_api_admin.css"
+        'vendor/bootstrap/dist/css/bootstrap.min.css'
+        'vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
+        'vendor/select2/dist/css/select2.min.css'
+        'vendor/font-awesome/css/font-awesome.min.css' %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
+        {% endstylesheets %}
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}" />
+    {% endblock %}
+</head>
+
+<body>
+
+{% block body %}
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('admin_dashboard') }}"><i class="fa fa-map-o"></i> MassAPI</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-navbar-collapse">
+                <ul class="nav navbar-nav">
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="margin-top: 70px;">
+        {% block container %}{% endblock %}
+    </div>
+{% endblock %}
+
+<div class="modal fade" id="modal"></div>
+{% block javascripts %}
+    {% javascripts output="js/mass_api_admin.js"
+    'vendor/jquery/dist/jquery.min.js'
+    'vendor/bootstrap/dist/js/bootstrap.min.js'
+    'vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'
+    'vendor/select2/dist/js/select2.min.js'  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+        $('.select2').select2();
+        $('input.datepicker').datepicker({
+            'format': 'yyyy-mm-dd',
+            'changeMonth': true,
+            'changeYear':  true
+        });
+    </script>
+{% endblock %}
+</body>
+</html>

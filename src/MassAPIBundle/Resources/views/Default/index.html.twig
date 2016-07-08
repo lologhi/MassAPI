@@ -1,1 +1,23 @@
-Hello {{ name }}!
+{% extends 'MassAPIBundle:Default:layout.html.twig' %}
+
+{% block title %}MassAPI • Home{% endblock %}
+
+{% block container %}
+    Hello!
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts output="js/mass_api_home.js"
+    'bundles/massapi/js/google-maps.js'  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+        $('.select2').select2();
+        $('input.datepicker').datepicker({
+            'format': 'yyyy-mm-dd',
+            'changeMonth': true,
+            'changeYear':  true
+        });
+    </script>
+{% endblock %}

@@ -53,6 +53,7 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: MassAPIBundle\Entity\Place
+                repository: MassAPIBundle\Repository\PlaceRepository
         massapi.postal_address:
             driver: doctrine/orm
             classes:

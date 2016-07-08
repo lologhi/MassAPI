@@ -54,8 +54,8 @@ doctrine:
         charset:  UTF8
         server_version: 5.7
         types:
-            polygonjson: FrontBundle\Doctrine\Type\PolygonJsonType
-            pointjson:   FrontBundle\Doctrine\Type\PointJsonType
+            polygonjson: MassAPIBundle\Doctrine\Type\PolygonJsonType
+            pointjson:   MassAPIBundle\Doctrine\Type\PointJsonType
         mapping_types:
             polygon: polygonjson
             point:   pointjson
@@ -64,10 +64,10 @@ doctrine:
         auto_mapping: true
         dql:
             string_functions:
-                contains: FrontBundle\Doctrine\Functions\Contains
-                distance: FrontBundle\Doctrine\Functions\Distance
-                geomfromtext: FrontBundle\Doctrine\Functions\GeomFromText
-                geomfromjson: FrontBundle\Doctrine\Functions\GeomFromJson
+                contains: MassAPIBundle\Doctrine\Functions\Contains
+                distance: MassAPIBundle\Doctrine\Functions\Distance
+                geomfromtext: MassAPIBundle\Doctrine\Functions\GeomFromText
+                geomfromjson: MassAPIBundle\Doctrine\Functions\GeomFromJson
 
 # Swiftmailer Configuration
 swiftmailer:

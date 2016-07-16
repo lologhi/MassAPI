@@ -7,7 +7,6 @@
     {% block stylesheets %}
         {% stylesheets output="css/mass_api_front.css"
         'vendor/bootstrap/dist/css/bootstrap.min.css'
-        'vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
         'vendor/font-awesome/css/font-awesome.min.css' %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
         {% endstylesheets %}
@@ -48,21 +47,10 @@
     {% javascripts output="js/mass_api_front.js"
     'vendor/jquery/dist/jquery.min.js'
     'vendor/bootstrap/dist/js/bootstrap.min.js'
-    'vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'
-    'bundles/fosjsrouting/js/router.js' %}
+    'bundles/fosjsrouting/js/router.js'
+    'js/fos_js_routes.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
-
-    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-
-    <script>
-        $('.select2').select2();
-        $('input.datepicker').datepicker({
-            'format': 'yyyy-mm-dd',
-            'changeMonth': true,
-            'changeYear':  true
-        });
-    </script>
 {% endblock %}
 </body>
 </html>

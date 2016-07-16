@@ -8,5 +8,6 @@ html, body {
 }
 
 #gmap {
-    height: 100%; width: 100%;
+    height: 90%;
+    width: 100%;
 }

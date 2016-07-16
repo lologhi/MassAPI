@@ -1434,16 +1434,16 @@
         },
         {
             "name": "gedmo/doctrine-extensions",
-            "version": "v2.4.15",
+            "version": "v2.4.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
-                "reference": "8f172af78138ee3ea12e87be431dec3da0c2f4a9"
+                "reference": "1a0824035a46be999b9a04a951c9366455bd2585"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/8f172af78138ee3ea12e87be431dec3da0c2f4a9",
-                "reference": "8f172af78138ee3ea12e87be431dec3da0c2f4a9",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/1a0824035a46be999b9a04a951c9366455bd2585",
+                "reference": "1a0824035a46be999b9a04a951c9366455bd2585",
                 "shasum": ""
             },
             "require": {
@@ -1509,7 +1509,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2016-07-08 05:48:13"
+            "time": "2016-07-15 13:40:22"
         },
         {
             "name": "guzzle/guzzle",
@@ -5107,12 +5107,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behatch/contexts.git",
-                "reference": "d3fb4cc85b51339c5724740fa3f718b825f9222b"
+                "reference": "1d2423c0d14f7593e5ab8ffa9ac80e4771ef397e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behatch/contexts/zipball/d3fb4cc85b51339c5724740fa3f718b825f9222b",
-                "reference": "d3fb4cc85b51339c5724740fa3f718b825f9222b",
+                "url": "https://api.github.com/repos/Behatch/contexts/zipball/1d2423c0d14f7593e5ab8ffa9ac80e4771ef397e",
+                "reference": "1d2423c0d14f7593e5ab8ffa9ac80e4771ef397e",
                 "shasum": ""
             },
             "require": {
@@ -5148,7 +5148,7 @@
                 "Context",
                 "Symfony2"
             ],
-            "time": "2016-07-08 10:37:36"
+            "time": "2016-07-10 14:29:02"
         },
         {
             "name": "doctrine/data-fixtures",

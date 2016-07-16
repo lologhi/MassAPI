@@ -48,9 +48,12 @@
     'vendor/jquery/dist/jquery.min.js'
     'vendor/bootstrap/dist/js/bootstrap.min.js'
     'vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'
-    'vendor/select2/dist/js/select2.min.js'  %}
+    'vendor/select2/dist/js/select2.min.js'
+    'bundles/fosjsrouting/js/router.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
     <script>
         $('.select2').select2();

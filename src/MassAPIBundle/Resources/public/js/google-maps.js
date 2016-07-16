@@ -82,14 +82,14 @@ map.on('load', function () {
         lng1: encodeURIComponent(bounds.getSouthWest().lng),
         lat1: encodeURIComponent(bounds.getNorthEast().lat),
         lng2: encodeURIComponent(bounds.getNorthEast().lng),
-        lat2: encodeURIComponent(bounds.getSouthWest().lat),
+        lat2: encodeURIComponent(bounds.getSouthWest().lat)
     })).done(function(data) {
         // If we didn't receive anything, we don't do anything
         if ($.isEmptyObject(data)) {
             return;
         }
 
-        if (map.getSource('places')) {
+        if (undefined !== map.getSource('places')) {
             map.removeSource('places');
         }
 
@@ -111,4 +111,29 @@ map.on('load', function () {
             "text-anchor": "top"
         }
     });
+});
+
+// Create a popup, but don't add it to the map yet.
+var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+});
+
+map.on('mousemove', function(e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+    // Change the cursor style as a UI indicator.
+    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+
+    if (!features.length) {
+        popup.remove();
+        return;
+    }
+
+    var feature = features[0];
+
+    // Populate the popup and set its coordinates
+    // based on the feature found.
+    popup.setLngLat(feature.geometry.coordinates)
+        .setHTML(feature.properties.title)
+        .addTo(map);
 });

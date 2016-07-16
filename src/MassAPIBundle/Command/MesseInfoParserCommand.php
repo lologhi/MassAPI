@@ -65,6 +65,7 @@ class MesseInfoParserCommand extends ContainerAwareCommand
                     $geo = new GeoCoordinates();
                     $geo->setLatitude($result['P']['latitude']);
                     $geo->setLongitude($result['P']['longitude']);
+                    $geo->setGeoPoint('{ "type": "Point", "coordinates": ['.$result['P']['longitude'].', '.$result['P']['latitude'].'] }');
 
                     $photo = new ImageObject();
                     $photo->setCaption($result['P']['picture']);

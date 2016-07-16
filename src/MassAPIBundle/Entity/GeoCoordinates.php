@@ -2,6 +2,7 @@
 
 namespace MassAPIBundle\Entity;
 
+use MassAPIBundle\Validator\Json;
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -40,6 +41,35 @@ class GeoCoordinates
      * @Iri("https://schema.org/longitude")
      */
     private $longitude;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="geo_point", type="pointjson")
+     *
+     * @Json()
+     */
+    private $geoPoint;
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updateGeoPoint()
+    {
+        $this->geoPoint = '{ "type": "Point", "coordinates": ['.$this->longitude.', '.$this->latitude.'] }';
+    }
+
+    /**
+     * @return array
+     */
+    public function getPosition()
+    {
+        return array(
+            $this->getLongitude(),
+            $this->getLatitude(),
+        );
+    }
 
     /**
      * Sets id.
@@ -111,5 +141,21 @@ class GeoCoordinates
     public function getLongitude()
     {
         return $this->longitude;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGeoPoint()
+    {
+        return $this->geoPoint;
+    }
+
+    /**
+     * @param string $geoPoint
+     */
+    public function setGeoPoint($geoPoint)
+    {
+        $this->geoPoint = $geoPoint;
     }
 }

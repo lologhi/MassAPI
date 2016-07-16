@@ -1,6 +1,6 @@
 <?php
 
-namespace MassApiBundle\Doctrine\Functions;
+namespace MassAPIBundle\Doctrine\Functions;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;

@@ -1,6 +1,6 @@
 <?php
 
-namespace MassAPIBundle\Form;
+namespace MassAPIBundle\Form\Type;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

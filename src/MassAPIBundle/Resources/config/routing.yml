@@ -3,6 +3,13 @@ home:
     defaults:
         _controller: MassAPIBundle:Default:index
 
+place:
+    path: /places
+    defaults:
+        _controller: MassAPIBundle:Default:nearPlace
+    options:
+        expose: true
+
 admin:
     resource: "@MassAPIBundle/Resources/config/routing/admin.yml"
     prefix: /admin

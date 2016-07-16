@@ -2,6 +2,7 @@
 
 namespace MassAPIBundle\Controller;
 
+use MassAPIBundle\Entity\Place;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,9 +38,26 @@ class DefaultController extends Controller
             ))
         ));
 
+        $cleanPlaces = array();
+        /** @var Place $place */
+        foreach ($places as $place) {
+            $cleanPlaces[] = array(
+                'type'      => 'Feature',
+                'properties'=> array(
+                    'title'     => $place->getName(),
+                    'icon'      => 'star'
+                ),
+                'geometry'  => array(
+                    'type'          => 'Point',
+                    'coordinates'   => array($place->getGeo()->getLongitude(), $place->getGeo()->getLatitude())
+                )
+            );
+
+        }
+
         return new JsonResponse(array(
             'type'     => 'FeatureCollection',
-            'features' => $places,
+            'features' => $cleanPlaces,
         ));
     }
 }

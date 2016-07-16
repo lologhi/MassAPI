@@ -1,16 +1,6 @@
-window.onload = loadScript;
-
-function loadScript() {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://maps.googleapis.com/maps/api/js?v=3&key=' + villa_details['google_maps_key'] +
-        '&signed_in=true&callback=initialize';
-    document.body.appendChild(script);
-}
-
 /* START GEOLOCATION */
 
-if (!navigator.geolocation) {
+/*if (!navigator.geolocation) {
     alert('Geolocation is not available');
 } else {
     geolocate.onclick = function (e) {
@@ -39,74 +29,86 @@ map.on('locationfound', function(e) {
 });
 map.on('locationerror', function() {
     geolocate.innerHTML = 'Position could not be found';
-});
+});*/
 /* END GEOLOCATION */
 
-function initialize() {
+mapboxgl.accessToken = 'pk.eyJ1IjoibGF1cmVudGdoIiwiYSI6IjdveXNkOEUifQ.F7qS-bIlU5-e23HB-SBDpA';
+var map = new mapboxgl.Map({
+    container: 'gmap',
+    center: [details['longitude'], details['latitude']],
+    zoom: 13,
+    style: 'mapbox://styles/mapbox/outdoors-v9'
+});
+map.addControl(new mapboxgl.Navigation());
+map.scrollZoom.disable();
 
-    var villaPosition = new google.maps.LatLng(villa_details['latitude'],villa_details['longitude']);
-    var mapOptions = {
-        center: villaPosition, zoom: 15, scrollwheel: false, streetViewControl: false,
-        styles: [
-            { featureType: "all", elementType: "all", stylers: [ { visibility: "on" }, { saturation: -100 }, { gamma: 1.94 } ] },
-            { featureType: "water", stylers: [ { color: "#f3ffff" } ] },
-            { featureType: "poi", stylers: [{visibility: "off"}] }
-        ]
-    };
-    var map = new google.maps.Map(document.getElementById('gmap'), mapOptions);
-
-    var villaMarker = new google.maps.Marker({position: villaPosition, map: map, title:villa_details['name'], icon: villa_details['mapIcon']});
-
-    infoWindow = new google.maps.InfoWindow({content: ""});
-    map.data.addListener('click', function(event) {
-        infoWindow.setContent('<div><a href="'+event.feature.getProperty('link')+'"><h3>'+event.feature.getProperty('title')+'</h3></a><div>'+event.feature.getProperty('description')+'</div></div>');
-        var anchor = new google.maps.MVCObject();
-        anchor.set("position",event.latLng);
-        infoWindow.open(map,anchor);
+map.on('load', function () {
+    // Add a GeoJSON source containing place coordinates and information.
+    map.addSource("mylocation", {
+        "type": "geojson",
+        "data": {
+            "type": "FeatureCollection",
+            "features": [{
+                "type": "Feature",
+                "properties": {
+                    "title": details['name'],
+                    "icon": "star"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [details['longitude'], details['latitude']]
+                }
+            }]
+        }
     });
 
-    map.data.setStyle(function(feature) {
-        var iconUrl = feature.getProperty('iconUrl');
-        var iconSize = new google.maps.Size(32, 37);
-        var iconOrigin = new google.maps.Point(feature.getProperty('iconOriginX'),feature.getProperty('iconOriginY'));
-
-        return ({
-            icon: {
-                url: iconUrl,
-                size: iconSize,
-                origin: iconOrigin
-            }
-        });
+    // Add a layer showing the places
+    map.addLayer({
+        "id": "mylocation",
+        "type": "symbol",
+        "source": "mylocation",
+        "layout": {
+            "icon-image": "{icon}-15",
+            "text-field": "{title}",
+            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            "text-offset": [0, 0.6],
+            "text-anchor": "top"
+        }
     });
+}).on('dragend', function() {
+    var bounds = map.getBounds();
 
-    // when the map is deplaced, we retrieve the geoJson of corresponding POI
-    google.maps.event.addListener(map, 'idle', function() {
-        var bounds = map.getBounds();
-
-        // If map area is a point (surface = 0), we don't even trigger the request
-        if (bounds.getSouthWest().lng() == bounds.getNorthEast().lng() || bounds.getSouthWest().lat() == bounds.getNorthEast().lat()) {
+    $.getJSON(Routing.generate('place', {
+        lng1: encodeURIComponent(bounds.getSouthWest().lng),
+        lat1: encodeURIComponent(bounds.getNorthEast().lat),
+        lng2: encodeURIComponent(bounds.getNorthEast().lng),
+        lat2: encodeURIComponent(bounds.getSouthWest().lat),
+    })).done(function(data) {
+        // If we didn't receive anything, we don't do anything
+        if ($.isEmptyObject(data)) {
             return;
         }
 
-        $.getJSON(Routing.generate('front_poi_list', {
-            lng1: encodeURIComponent(bounds.getSouthWest().lng()),
-            lat1: encodeURIComponent(bounds.getNorthEast().lat()),
-            lng2: encodeURIComponent(bounds.getNorthEast().lng()),
-            lat2: encodeURIComponent(bounds.getSouthWest().lat()),
-            _locale: villa_details['locale'],
-            host: window.location.hostname
-        })).done(function(data) {
-            // If we didn't receive anything, we don't do anything
-            if ($.isEmptyObject(data)) {
-                return;
-            }
+        if (map.getSource('places')) {
+            map.removeSource('places');
+        }
 
-            map.data.forEach(function(feature) {
-                map.data.remove(feature);
-            });
-
-            map.data.addGeoJson(data);
+        var places = new mapboxgl.GeoJSONSource({
+            data: data
         });
+        map.addSource('places', places);
     });
 
-}
+    map.addLayer({
+        "id": "places",
+        "type": "symbol",
+        "source": "places",
+        "layout": {
+            "icon-image": "{icon}-15",
+            "text-field": "{title}",
+            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            "text-offset": [0, 0.6],
+            "text-anchor": "top"
+        }
+    });
+});

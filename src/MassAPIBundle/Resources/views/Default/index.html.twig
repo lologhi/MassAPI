@@ -2,18 +2,40 @@
 
 {% block title %}MassAPI • Home{% endblock %}
 
+{% block stylesheets %}
+    {% stylesheets output="css/mass_api_front_home.css"
+    'bundles/massapi/css/mass.css' %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
+    {% endstylesheets %}
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}" />
+{% endblock %}
+
+{% block javascripts_head %}
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
+{% endblock %}
+
 {% block container %}
-    Hello!
+    <div id="gmap"></div>
 {% endblock %}
 
 {% block javascripts %}
-    {% javascripts output="js/mass_api_home.js"
+    {{ parent() }}
+
+    <script>
+    var details = {
+        'longitude': -0.5816439,
+        'latitude': 44.8595317,
+        'name': 'là'
+    }
+    </script>
+
+    {% javascripts output="js/mass_api_front_home.js"
     'bundles/massapi/js/google-maps.js'  %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
     <script>
-        $('.select2').select2();
         $('input.datepicker').datepicker({
             'format': 'yyyy-mm-dd',
             'changeMonth': true,

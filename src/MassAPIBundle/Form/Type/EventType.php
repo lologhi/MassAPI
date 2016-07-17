@@ -33,10 +33,7 @@ class EventType extends AbstractType
                 'widget' => 'single_text',
                 'data' => new \DateTime(),
             ))
-            ->add('duration', EntityType::class, array(
-                'class'    => 'MassAPIBundle\Entity\Duration',
-                'property' => 'name',
-            ))
+            ->add('duration')
             ->add('doorTime', DateType::class, array(
                 'widget' => 'single_text',
                 'data' => new \DateTime(),

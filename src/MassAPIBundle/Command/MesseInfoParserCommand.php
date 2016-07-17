@@ -3,7 +3,6 @@
 namespace MassAPIBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use MassAPIBundle\Entity\Duration;
 use MassAPIBundle\Entity\Event;
 use MassAPIBundle\Entity\GeoCoordinates;
 use MassAPIBundle\Entity\ImageObject;

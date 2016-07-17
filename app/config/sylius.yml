@@ -13,10 +13,6 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: MassAPIBundle\Entity\CreativeWork
-        massapi.duration:
-            driver: doctrine/orm
-            classes:
-                model: MassAPIBundle\Entity\Duration
         massapi.event:
             driver: doctrine/orm
             classes:

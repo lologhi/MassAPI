@@ -89,23 +89,15 @@ class MesseInfoParserCommand extends ContainerAwareCommand
 
         // Get mass
         $eventRepository = $em->getRepository('MassAPIBundle:Event');
-        $durationRepository = $em->getRepository('MassAPIBundle:Duration');
         foreach ($response['O'] as $result) {
             if (isset($result['P']['time'])) {
-                $duration = $durationRepository->findOneBy(array('name' => $result['P']['length']));
-                if (! $duration instanceof Duration) {
-                    $duration = new Duration();
-                    $duration->setName($result['P']['length']);
-                    $output->writeln('Added: ' . $result['P']['length'] . ' duration');
-                }
-
                 $datetime = new \DateTime();
                 $doorTime = $datetime->createFromFormat('Y-m-d H\hi', $result['P']['date'] . ' ' . $result['P']['time']);
                 $startDate = $datetime->createFromFormat('Y-m-d', $result['P']['date']);
 
                 $event = $eventRepository->findOneBy(array(
                     'description'   => $result['P']['id'],
-                    'duration'      => $duration,
+                    'duration'      => $result['P']['length'],
                     'doorTime'      => $doorTime,
                     'startDate'     => $startDate
                 ));
@@ -114,7 +106,7 @@ class MesseInfoParserCommand extends ContainerAwareCommand
                 if (! $event instanceof Event) {
                     $event = new Event();
                     $event->setDoorTime($doorTime);
-                    $event->setDuration($duration);
+                    $event->setDuration($result['P']['length']);
                     $event->setDescription($result['P']['id']);
                     $event->setStartDate($startDate);
 
@@ -122,7 +114,7 @@ class MesseInfoParserCommand extends ContainerAwareCommand
                     $output->writeln('Added: ' . $result['P']['date'] . ' @ ' . $result['P']['time']);
                 }
 
-                if (! $event->hasLocation($place)) {
+                if ($place instanceof Place && ! $event->hasLocation($place)) {
                     $event->addLocation($place);
                     $output->writeln('Linked ' . $result['P']['date'] . ' @ ' . $result['P']['time'] . ' to ' . $place->getName());
                 }

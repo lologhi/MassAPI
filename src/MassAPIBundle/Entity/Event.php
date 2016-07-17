@@ -83,9 +83,10 @@ class Event implements ResourceInterface
      */
     private $doorTime;
     /**
-     * @var Duration The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601).
-     * 
-     * @ORM\OneToOne(targetEntity="MassAPIBundle\Entity\Duration", cascade={"persist"})
+     * @var string The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601).
+     *
+     * @ORM\Column(nullable=true)
+     * @Assert\Type(type="string")
      * @Iri("https://schema.org/duration")
      */
     private $duration;
@@ -467,11 +468,11 @@ class Event implements ResourceInterface
     /**
      * Sets duration.
      * 
-     * @param Duration $duration
+     * @param string $duration
      * 
      * @return $this
      */
-    public function setDuration(Duration $duration = null)
+    public function setDuration($duration = null)
     {
         $this->duration = $duration;
 
@@ -481,7 +482,7 @@ class Event implements ResourceInterface
     /**
      * Gets duration.
      * 
-     * @return Duration
+     * @return string
      */
     public function getDuration()
     {

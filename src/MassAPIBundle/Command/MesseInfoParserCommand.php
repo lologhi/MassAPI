@@ -113,8 +113,8 @@ class MesseInfoParserCommand extends ContainerAwareCommand
                     $output->writeln('Added: ' . $result['P']['date'] . ' @ ' . $result['P']['time']);
                 }
 
-                if ($place instanceof Place && ! $event->hasLocation($place)) {
-                    $event->addLocation($place);
+                if ($place instanceof Place) {
+                    $event->setLocation($place);
                     $output->writeln('Linked ' . $result['P']['date'] . ' @ ' . $result['P']['time'] . ' to ' . $place->getName());
                 }
             }

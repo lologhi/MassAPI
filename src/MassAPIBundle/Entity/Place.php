@@ -59,7 +59,7 @@ class Place implements ResourceInterface
     /**
      * @var ArrayCollection<Event> Upcoming or past event associated with this place, organization, or action.
      * 
-     * @ORM\ManyToMany(targetEntity="MassAPIBundle\Entity\Event")
+     * @ORM\OneToMany(targetEntity="MassAPIBundle\Entity\Event", mappedBy="location")
      * @Iri("https://schema.org/event")
      */
     private $event;

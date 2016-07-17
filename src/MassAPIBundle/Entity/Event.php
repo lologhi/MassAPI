@@ -122,9 +122,9 @@ class Event implements ResourceInterface
      */
     private $inLanguage;
     /**
-     * @var ArrayCollection<Place> The location of for example where the event is happening, an organization is located, or where an action takes place.
+     * @var Place The location of for example where the event is happening, an organization is located, or where an action takes place.
      * 
-     * @ORM\ManyToMany(targetEntity="MassAPIBundle\Entity\Place")
+     * @ORM\ManyToOne(targetEntity="MassAPIBundle\Entity\Place", inversedBy="event")
      * @Iri("https://schema.org/location")
      */
     private $location;
@@ -606,23 +606,9 @@ class Event implements ResourceInterface
      * 
      * @return $this
      */
-    public function addLocation(Place $location)
+    public function setLocation(Place $location)
     {
-        $this->location[] = $location;
-
-        return $this;
-    }
-
-    /**
-     * Removes location.
-     * 
-     * @param Place $location
-     * 
-     * @return $this
-     */
-    public function removeLocation(Place $location)
-    {
-        $this->location->removeElement($location);
+        $this->location = $location;
 
         return $this;
     }
@@ -630,22 +616,11 @@ class Event implements ResourceInterface
     /**
      * Gets location.
      * 
-     * @return ArrayCollection<Place>
+     * @return Place
      */
     public function getLocation()
     {
         return $this->location;
-    }
-
-    public function hasLocation(Place $location)
-    {
-        foreach ($this->location as $linkedLocation) {
-            if ($linkedLocation === $location) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

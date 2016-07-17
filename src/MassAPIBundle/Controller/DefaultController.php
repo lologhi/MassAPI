@@ -2,6 +2,7 @@
 
 namespace MassAPIBundle\Controller;
 
+use MassAPIBundle\Entity\Event;
 use MassAPIBundle\Entity\Place;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -41,11 +42,19 @@ class DefaultController extends Controller
         $cleanPlaces = array();
         /** @var Place $place */
         foreach ($places as $place) {
+            $upcomingEvents = '<ul>';
+            /** @var Event $event */
+            foreach ($place->getEvent() as $event) {
+                $upcomingEvents .= '<li>' . $event->getDoorTime()->format('H:i:s \à d/m/Y') . '</li>';
+            }
+            $upcomingEvents .= '</ul>';
+
             $cleanPlaces[] = array(
                 'type'      => 'Feature',
                 'properties'=> array(
                     'title'     => $place->getName(),
-                    'icon'      => 'star'
+                    'icon'      => 'star',
+                    'events'    => $upcomingEvents
                 ),
                 'geometry'  => array(
                     'type'          => 'Point',

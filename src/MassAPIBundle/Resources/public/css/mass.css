@@ -6,7 +6,11 @@ html, body {
     height: 100%;
 }
 
+.container-fluid {
+    padding: 0;
+}
+
 #gmap {
-    height: 90%;
+    height: 100%;
     width: 100%;
 }

@@ -3,6 +3,8 @@
 
 <head>
     <title>{% block title %}MassAPI • Admin{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     {% block stylesheets %}
         {% stylesheets output="css/mass_api_front.css"
@@ -29,10 +31,10 @@
     {% javascripts output="js/mass_api_front.js"
     'vendor/jquery/dist/jquery.min.js'
     'vendor/bootstrap/dist/js/bootstrap.min.js'
-    'bundles/fosjsrouting/js/router.js'
-    'js/fos_js_routes.js' %}
+    'bundles/fosjsrouting/js/router.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 {% endblock %}
 </body>
 </html>

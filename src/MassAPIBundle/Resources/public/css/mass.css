@@ -7,7 +7,7 @@ html, body {
 }
 
 .container-fluid {
-    padding: 0;
+    padding: 0 !important;
 }
 
 #gmap {

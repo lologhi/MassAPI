@@ -8,11 +8,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class HomeController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('MassAPIBundle:Default:index.html.twig');
+        return $this->render('MassAPIBundle:Home:index.html.twig');
+    }
+
+    public function mapAction()
+    {
+        return $this->render('MassAPIBundle:Home:map.html.twig');
     }
 
     public function nearPlaceAction(Request $request)

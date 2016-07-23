@@ -9,8 +9,3 @@ html, body {
 .container-fluid {
     padding: 0 !important;
 }
-
-#gmap {
-    height: 100%;
-    width: 100%;
-}

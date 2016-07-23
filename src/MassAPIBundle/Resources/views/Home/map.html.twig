@@ -1,13 +1,14 @@
-{% extends 'MassAPIBundle:Default:layout.html.twig' %}
+{% extends 'MassAPIBundle:Home:layout.html.twig' %}
 
 {% block title %}MassAPI • Home{% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
+
     {% stylesheets output="css/mass_api_front_home.css"
-    'bundles/massapi/css/mass.css' %}
+    'bundles/massapi/css/map.css' %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
     {% endstylesheets %}
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}" />
 {% endblock %}
 
 {% block javascripts_head %}

@@ -1,12 +1,17 @@
 home:
     path: /
     defaults:
-        _controller: MassAPIBundle:Default:index
+        _controller: MassAPIBundle:Home:index
+
+map:
+    path: /map
+    defaults:
+        _controller: MassAPIBundle:Home:map
 
 place:
     path: /places
     defaults:
-        _controller: MassAPIBundle:Default:nearPlace
+        _controller: MassAPIBundle:Home:nearPlace
     options:
         expose: true
 

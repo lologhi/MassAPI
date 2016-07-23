@@ -9,10 +9,10 @@
     {% block stylesheets %}
         {% stylesheets output="css/mass_api_front.css"
         'vendor/bootstrap/dist/css/bootstrap.min.css'
-        'vendor/font-awesome/css/font-awesome.min.css' %}
+        'vendor/font-awesome/css/font-awesome.min.css'
+        'bundles/massapi/css/layout.css' %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet"/>
         {% endstylesheets %}
-        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}" />
     {% endblock %}
 
     {% block javascripts_head "" %}

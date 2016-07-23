@@ -4,15 +4,24 @@ namespace MassAPIBundle\Controller;
 
 use MassAPIBundle\Entity\Event;
 use MassAPIBundle\Entity\Place;
+use MassAPIBundle\Form\Type\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return $this->render('MassAPIBundle:Home:index.html.twig');
+        $searchForm = $this->createForm(new SearchType());
+
+        if ($request->isMethod('POST') && $searchForm->handleRequest($request)->isValid()) {
+            return $this->redirect($this->generateUrl('map', array($searchForm->getData())));
+        }
+
+        return $this->render('MassAPIBundle:Home:index.html.twig', array(
+            'searchForm' => $searchForm->createView(),
+        ));
     }
 
     public function mapAction()

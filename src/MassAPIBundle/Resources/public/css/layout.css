@@ -2,10 +2,7 @@ html, body {
     height: 100%;
 }
 
-.content {
-    height: 100%;
-}
-
 .container-fluid {
     padding: 0 !important;
+    height: 100%;
 }

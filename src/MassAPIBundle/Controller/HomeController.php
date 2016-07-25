@@ -16,7 +16,9 @@ class HomeController extends Controller
         $searchForm = $this->createForm(new SearchType());
 
         if ($request->isMethod('POST') && $searchForm->handleRequest($request)->isValid()) {
-            return $this->redirect($this->generateUrl('map', array($searchForm->getData())));
+            return $this->redirect($this->generateUrl('map', array(
+                'postalCode' => $searchForm->getData()->getPostalCode()
+            )));
         }
 
         return $this->render('MassAPIBundle:Home:index.html.twig', array(
@@ -24,9 +26,11 @@ class HomeController extends Controller
         ));
     }
 
-    public function mapAction()
+    public function mapAction($postalCode = null)
     {
-        return $this->render('MassAPIBundle:Home:map.html.twig');
+        return $this->render('MassAPIBundle:Home:map.html.twig', array(
+            'postalCode' => $postalCode,
+        ));
     }
 
     public function nearPlaceAction(Request $request)

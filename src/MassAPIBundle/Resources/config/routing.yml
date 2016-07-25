@@ -4,7 +4,7 @@ home:
         _controller: MassAPIBundle:Home:index
 
 map:
-    path: /map
+    path: /map/{postalCode}
     defaults:
         _controller: MassAPIBundle:Home:map
 

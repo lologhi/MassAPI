@@ -2,7 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: sylius.yml }
-    - { resource: services.yml }
 
 framework:
     #esi:             ~

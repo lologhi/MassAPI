@@ -22,4 +22,4 @@ parameters:
     api_description:   The full description of your API
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            aDifferentSecretThing

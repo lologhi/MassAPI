@@ -1,7 +1,7 @@
 admin_dashboard:
     path: /
     defaults:
-        _controller: vf.controller.location:indexAction
+        _controller: massapi.controller.location:indexAction
         _sylius:
             template: 'FrontBundle:Admin:dashboard.html.twig'
             paginate: false

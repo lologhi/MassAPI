@@ -52,16 +52,20 @@ class CodePostauxParserCommand extends ContainerAwareCommand
                 continue;
             }
 
-            if ('' === $data[11]) {
+            if ('' === $data[11] || '' === $data[12] || '-' === $data[11] || '-' === $data[12]) {
                 // No geo coordinates
+                // or weirder, just '-' as a longitude... Maybe it should be replaced by 0?
                 $i++;
                 continue;
             }
 
+            $latitude = str_replace(',', '.', $data[11]);
+            $longitude = str_replace(',', '.', $data[12]);
+
             $geo = new GeoCoordinates();
-            $geo->setLatitude($data[11]);
-            $geo->setLongitude($data[12]);
-            $geo->setGeoPoint('{ "type": "Point", "coordinates": ['.$data[12].', '.$data[11].'] }');
+            $geo->setLatitude($latitude);
+            $geo->setLongitude($longitude);
+            $geo->setGeoPoint('{ "type": "Point", "coordinates": ['.$longitude.', '.$latitude.'] }');
 
             $postalCode = new PostalCode();
             $postalCode->setGeo($geo);

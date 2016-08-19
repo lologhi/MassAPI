@@ -4,6 +4,7 @@ namespace MassAPIBundle\Controller;
 
 use MassAPIBundle\Entity\Event;
 use MassAPIBundle\Entity\Place;
+use MassAPIBundle\Entity\PostalCode;
 use MassAPIBundle\Form\Type\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,7 +17,7 @@ class HomeController extends Controller
         $searchForm = $this->createForm(new SearchType());
 
         if ($request->isMethod('POST') && $searchForm->handleRequest($request)->isValid()) {
-            return $this->redirect($this->generateUrl('map', array(
+            return $this->redirect($this->generateUrl('result', array(
                 'postalCode' => $searchForm->getData()->getPostalCode()
             )));
         }
@@ -26,8 +27,24 @@ class HomeController extends Controller
         ));
     }
 
-    public function mapAction($postalCode = null)
+    public function resultAction($postalCode)
     {
+        $em = $this->getDoctrine()->getManager();
+        $postalCode = $em->getRepository('MassAPIBundle:PostalCode')->findOneBy(array('postalCode' => $postalCode));
+
+        $places = $em->getRepository('MassAPIBundle:Place')->getByPostalCode($postalCode);
+
+        return $this->render('MassAPIBundle:Home:result.html.twig', array(
+            'postalCode' => $postalCode,
+            'places' => $places
+        ));
+    }
+
+    public function mapAction($postalCode)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $postalCode = $em->getRepository('MassAPIBundle:PostalCode')->findOneBy(array('postalCode' => $postalCode));
+
         return $this->render('MassAPIBundle:Home:map.html.twig', array(
             'postalCode' => $postalCode,
         ));

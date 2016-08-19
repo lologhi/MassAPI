@@ -3,6 +3,11 @@ home:
     defaults:
         _controller: MassAPIBundle:Home:index
 
+result:
+    path: /result/{postalCode}
+    defaults:
+        _controller: MassAPIBundle:Home:result
+
 map:
     path: /map/{postalCode}
     defaults:

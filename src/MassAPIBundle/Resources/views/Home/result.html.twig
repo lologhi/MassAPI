@@ -1,0 +1,25 @@
+{% extends 'MassAPIBundle:Home:layout.html.twig' %}
+
+{% block title %}MassAPI • Resultats à {{ postalCode.cityName }} {{ postalCode.postalCode }}{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <h1>Églises de {{ postalCode.cityName }}</h1>
+        <div class="col-md-6">
+            {% for place in places %}
+                <div class="church">
+                    <h2>{{ place.name }}</h2>
+                    <p>{{ place.address.streetAddress }}, {{ place.address.postalCode }}, {{ place.address.addressLocality }}</p>
+                    <ul>
+                        {% for event in place.event %}
+                            <li>{{ event.doorTime|date('d/m/Y \à H:i') }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-default" href="{{ path('map', {'postalCode': postalCode.postalCode}) }}">Carte</a>
+        </div>
+    </div>
+{% endblock %}

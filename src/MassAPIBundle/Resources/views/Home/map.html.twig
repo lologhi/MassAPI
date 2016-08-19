@@ -1,6 +1,6 @@
 {% extends 'MassAPIBundle:Home:layout.html.twig' %}
 
-{% block title %}MassAPI • Home{% endblock %}
+{% block title %}MassAPI • Map{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -27,14 +27,14 @@
 
     <script>
     var details = {
-        'longitude': -0.5816439,
-        'latitude': 44.8595317,
+        'longitude': {{ postalCode.geo ? postalCode.geo.longitude : -0.5816439 }},
+        'latitude': {{ postalCode.geo ? postalCode.geo.latitude : 44.8595317 }},
         'name': 'là'
     }
     </script>
 
     {% javascripts output="js/mass_api_front_home.js"
-    'bundles/massapi/js/google-maps.js'  %}
+    'bundles/massapi/js/maps.js'  %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

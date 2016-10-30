@@ -1,2 +1,15 @@
 imports:
     - { resource: form.yml }
+
+services:
+    place.parser:
+        class: MassAPIBundle\MesseInfoParser\PlaceParser
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@logger"
+
+    event.parser:
+        class: MassAPIBundle\MesseInfoParser\EventParser
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@logger"

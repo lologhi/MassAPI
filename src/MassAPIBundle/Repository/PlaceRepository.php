@@ -16,6 +16,7 @@ class PlaceRepository extends EntityRepository
             ->andWhere('CONTAINS(GeomFromJson(:inside_json), g.geoPoint) > 0')
             ->setParameter('inside_json', $criteria['inside_json'])
             ->orderBy('e.doorTime', 'ASC')
+            ->setMaxResults(50)
             ->getQuery()
             ->getResult()
             ;

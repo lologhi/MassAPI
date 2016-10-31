@@ -27,13 +27,13 @@ class PlaceParser
 
     public function parse($response)
     {
-        if (! array_key_exists(self::RESULT_LIST, $response)) {
+        if (! is_array($response)||! array_key_exists(self::RESULT_LIST, $response)) {
             $this->logger->debug('No result list for this request.');
             return 0;
         }
 
         foreach ($response['O'] as $result) {
-            if (! array_key_exists(self::RESULT_NODE, $result)) {
+            if (! is_array($result)||! array_key_exists(self::RESULT_NODE, $result)) {
                 $this->logger->debug('No result node for this request.');
                 return 0;
             }

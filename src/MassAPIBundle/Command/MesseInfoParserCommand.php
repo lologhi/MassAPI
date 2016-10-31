@@ -49,7 +49,6 @@ class MesseInfoParserCommand extends ContainerAwareCommand
             $nbResults  = $input->getArgument('nbResults');
 
             $this->parse($zipCode, $city, $nbResults, $churchOnly);
-
             return 0;
         }
 
@@ -58,6 +57,7 @@ class MesseInfoParserCommand extends ContainerAwareCommand
         $postalCodes = $em->getRepository('MassAPIBundle:PostalCode')->findBy(array(), array(), $nbPostalCode, $offsetPostalCode);
 
         foreach ($postalCodes as $postalCode) {
+            $output->writeln('Querying '.$postalCode->getPostalCode());
             $this->parse($postalCode->getPostalCode(), $postalCode->getCityName(), 20, $churchOnly);
         }
 
@@ -66,7 +66,8 @@ class MesseInfoParserCommand extends ContainerAwareCommand
 
     protected function parse($zipCode, $city, $nbResults, $churchOnly)
     {
-        $jsonResponse = exec('curl \'http://egliseinfo.catholique.fr/gwtRequest\' -H \'Content-Type: application/json; charset=UTF-8\' --data-binary \'{"F":"cef.kephas.shared.request.AppRequestFactory","I":[{"O":"Bzv0wi60qgwcW5aKiRKrtgNaLKo=","P":[".fr '.$zipCode.' '.$city.'",0,'.$nbResults.',0,null,"",""],"R":["listCelebrationTime.locality"]}]}\'');
+        $output = array();
+        $jsonResponse = exec('curl \'http://egliseinfo.catholique.fr/gwtRequest\' -H \'Content-Type: application/json; charset=UTF-8\' --data-binary \'{"F":"cef.kephas.shared.request.AppRequestFactory","I":[{"O":"Bzv0wi60qgwcW5aKiRKrtgNaLKo=","P":[".fr '.$zipCode.' '.$city.'",0,'.$nbResults.',0,null,"",""],"R":["listCelebrationTime.locality"]}]}\' 2>&1', $output);
         $response = json_decode($jsonResponse, true);
 
         // Get church

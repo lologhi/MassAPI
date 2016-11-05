@@ -13,8 +13,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class OpenStreetMapQueryCommand extends ContainerAwareCommand
 {
-    private $baseUrl = 'http://overpass.osm.rambler.ru/cgi/interpreter?data=';
-
     protected function configure()
     {
         $this
@@ -34,28 +32,36 @@ class OpenStreetMapQueryCommand extends ContainerAwareCommand
 
         foreach ($places as $place) {
             $results = $this->queryNode($place->getGeo()->getLatitude(),$place->getGeo()->getLongitude());
-            dump($results);
-            foreach ($results as $result) {
-                dump($result);
-                if (array_key_exists('tags', $result) && array_key_exists('name', $result['tags'])) {
-                    $place->setName($result['tags']['name']);
-                }
-                if (array_key_exists('lat', $result) && array_key_exists('lon', $result)) {
-                    $place->getGeo()->setLatitude($result['lat']);
-                    $place->getGeo()->setLongitude($result['lon']);
+            if (! empty($results['elements'])) {
+                foreach ($results['elements'] as $result) {
+                    dump($result);
+                    if (array_key_exists('tags', $result) && array_key_exists('name', $result['tags'])) {
+                        $place->setName($result['tags']['name']);
+                    }
+                    if (array_key_exists('lat', $result) && array_key_exists('lon', $result)) {
+                        $place->getGeo()->setLatitude($result['lat']);
+                        $place->getGeo()->setLongitude($result['lon']);
+                    }
                 }
             }
 
             $results = $this->queryWay($place->getGeo()->getLatitude(),$place->getGeo()->getLongitude());
-            foreach ($results as $result) {
-                dump($result);
-                if (array_key_exists('tags', $result) && array_key_exists('name', $result['tags'])) {
-                    $place->setName($result['tags']['name']);
+            if (! empty($results['elements'])) {
+                foreach ($results['elements'] as $result) {
+                    dump($result);
+                    if (array_key_exists('tags', $result) && array_key_exists('name', $result['tags'])) {
+                        $place->setName($result['tags']['name']);
+                    }
+                    if (array_key_exists('nodes', $result) && !empty($result['nodes'])) {
+                        $result = $client->get('node/' . $result['nodes'][0]);
+                        $node = simplexml_load_string($result->getBody()->getContents());
+                        $attributes = $node->node[0]->attributes();
+                        if (array_key_exists('lat', $attributes) && array_key_exists('lon', $attributes)) {
+                            $place->getGeo()->setLatitude($attributes['lat']);
+                            $place->getGeo()->setLongitude($attributes['lon']);
+                        }
+                    }
                 }
-                if (array_key_exists('nodes', $result) && !empty($result['nodes']))
-                $result = json_decode($client->get('node/'.$result['nodes'][0]), true);
-                dump($result);
-                die('hard');
             }
         }
     }

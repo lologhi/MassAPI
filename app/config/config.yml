@@ -104,3 +104,14 @@ nelmio_api_doc:
         request_format:
             formats:
                 json:       "application/json"
+
+csa_guzzle:
+    profiler:
+        enabled: true
+    logger:
+        enabled: true
+    clients:
+        osm_api:
+            config:
+                base_uri: "%osm_api%"
+                version: 1.0

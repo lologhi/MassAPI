@@ -86,7 +86,6 @@ After retrieving a compressed `.osm.bz2` file, use `bzip2 -d filename.osm.bz2` c
 
 ```
 osmosis --read-xml france-latest.osm --node-key-value keyValueList="amenity.place_of_worship" --write-xml placeOfWorkship-node.osm
-osmosis --read-xml france-latest.osm --way-key-value  keyValueList="amenity.place_of_worship" --write-xml placeOfWorkship-way.osm
 ```
 
 Output XML file looks like:
@@ -101,3 +100,14 @@ Output XML file looks like:
     <tag k="created_by" v="JOSM"/>
   </node>
 ```
+
+But it's only `node` (1.9Mo file from a 82Go file for France POI...), and no `ways`. But churches can be the two of them so I also tried :
+
+```
+osmosis --read-xml france-latest.osm --way-key-value  keyValueList="amenity.place_of_worship" --write-xml placeOfWorkship-way.osm
+osmosis --read-xml france-latest.osm --tf accept-nodes amenity=place_of_worship --write-xml placeOfWorkship-way.osm
+```
+
+But the result was so huge (~27Go) that it might not be good. 32% POI in France being `place_of_worship` is too much! 
+
+Also tried [osmcode/osmium-tool](https://github.com/osmcode/osmium-tool) but it seems not made to filter data.

@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Csa\Bundle\GuzzleBundle\CsaGuzzleBundle(),
 
             new MassAPIBundle\MassAPIBundle(),
         ];
